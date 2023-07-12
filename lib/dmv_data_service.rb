@@ -12,8 +12,8 @@ class DmvDataService
     @wa_ev_registrations ||= load_data('https://data.wa.gov/resource/rpr4-cgyd.json')
   end
 
-  def or_dmv_office_locations
-    @or_dmv_office_locations ||= load_data('https://data.oregon.gov/resource/rj4w-f4jc.json')
+  def co_dmv_office_locations
+    @or_dmv_office_locations ||= load_data('https://data.colorado.gov/resource/dsw3-mrn4.json')
   end
 
   def ny_dmv_office_locations
