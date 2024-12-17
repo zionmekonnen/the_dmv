@@ -20,11 +20,3 @@ end
 
 
 
-# def name(first = "zion", last)
-#     first + " " + last 
-# end
-
-# name("zion", "mekonnen")
-# name('gideon', 'mekonnen')
-# p name( , "mekonnen")
-# name('jael', 'smith')
