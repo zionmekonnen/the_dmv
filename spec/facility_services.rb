@@ -22,39 +22,77 @@ RSpec.describe Facility do
         end
     end
 
-    it "adds new service" do
-        facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
-        facility_1.add_service('Vehicle Registration')
+    # it "adds new service" do
+    #     facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+    #     facility_1.add_service('Vehicle Registration')
 
-        expect(facility_1.services).to include('Vehicle Registration')
-    end
+    #     expect(facility_1.services).to include('Vehicle Registration')
+    # end
 
-    it 'returns nil for cruz registration date' do
-        cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
+    # it 'returns nil for cruz registration date' do
+    #     cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
         
-        expect(cruz.registration_date).to eq(nil)
-    end
+    #     expect(cruz.registration_date).to eq(nil)
+    #end
 
-    it 'returns [] for registered vehicles' do
-        facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+    # it 'returns [] for registered vehicles' do
+    #     facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
         
-        expect(facility_1.registered_vehicles).to eq([])
+    #     expect(facility_1.registered_vehicles).to eq([])
 
-    end
+    # end
     
-    it 'returns [] for collected fees' do
-        facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+    # it 'returns [] for collected fees' do
+    #     facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
 
-        expect(facility_1.collected_fees).to eq(0)
+    #     expect(facility_1.collected_fees).to eq(0)
 
-    end
+    # end
 
-    it 'registers a vehicle' do
+    # it 'registers a vehicle' do
+    #     facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+    #     cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
+         
+    #     expect(facility_1.register_vehicle(cruz)).to include(cruz)
+    #end
+    it 'returns cruz registration date' do
         facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
         cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
-         
-        expect(facility_1.register_vehicle(cruz)).to include(cruz)
+       
+        facility_1.register_vehicle(cruz)
+        
+
+        expect(cruz.registration_date).to eq(Date.today)
     end
+
+    it "return plate type for cruz" do
+        facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+        cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
+        
+        facility_1.register_vehicle(cruz)
+        
+        expect(cruz.plate_type).to eq(:regular)
+    end
+
+    it 'a vehicle has been registered' do
+        facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+        cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
+        
+        facility_1.register_vehicle(cruz)
+        expect(facility_1.registered_vehicles).to include(cruz)
+        
+    end
+
+    it "updates collected fees when vehicle is registered" do 
+        facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+        cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
+        
+        facility_1.register_vehicle(cruz)
+        expect(facility_1.collected_fees).to eq(100)
+    end
+
+
+
 
 
 

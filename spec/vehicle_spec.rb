@@ -33,4 +33,11 @@ RSpec.describe Vehicle do
       expect(@camaro.electric_vehicle?).to eq(false)
     end
   end
+  it 'returns nil for cruz registration date' do
+    cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
+    
+    expect(cruz.registration_date).to eq(nil)
+  end
+
+
 end
